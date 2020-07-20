@@ -1,0 +1,32 @@
+{
+  "@@last_modified": "2020-07-20T13:41:01.421638",
+  "settingTitle": "Setting",
+  "@settingTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeTheme": "Change Theme",
+  "@changeTheme": {
+    "description": "切换主题",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appName": "appname",
+  "@appName": {
+    "description": "app名称",
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutApp": "关于我们",
+  "@aboutApp": {
+    "description": "关于",
+    "type": "text",
+    "placeholders": {}
+  },
+  "languageTitle": "Change Language",
+  "@languageTitle": {
+    "description": "修改语言",
+    "type": "text",
+    "placeholders": {}
+  }
+}
