@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:phonebase/i10n/localization_intl.dart';
-import 'package:phonebase/pages/widgets/top_show_widget.dart';
-import 'package:phonebase/pages/widgets/update_progress_widget.dart';
-import 'package:phonebase/utils/overlay_util.dart';
+import 'package:medical/pages/widgets/top_show_widget.dart';
+import 'package:medical/pages/widgets/update_progress_widget.dart';
+import 'package:medical/utils/overlay_util.dart';
 
 class UpdateDialog extends StatefulWidget {
   final String version;
@@ -39,6 +38,7 @@ class UpdateDialogState extends State<UpdateDialog> {
     final marginLeft = isVertical ? size.width / 8 : size.width / 4;
     final marginTop = isVertical ? size.height / 4 : size.height / 8;
 
+    print(widget.updateUrl);
     return WillPopScope(
       onWillPop: () async => false,
       child: Container(

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:phonebase/bean/color_bean.dart';
+import 'package:medical/bean/color_bean.dart';
 
 class TaskIconBean {
   String taskName;

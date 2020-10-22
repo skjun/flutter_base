@@ -1,4 +1,4 @@
-name: phonebase
+name: medical
 description: Android开发基础项目
 
 # The following line prevents the package from being accidentally published to
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -66,10 +66,27 @@ dependencies:
   #滚轮选择
   wheel_chooser: ^0.1.0
   #svg----这个控件真是饱受挫折呀！
-  flutter_svg: ^0.17.4
+  # flutter_svg: ^0.17.4
   #
-  fluttertoast: ^6.0.0
-
+  oktoast: ^2.3.2
+  font_awesome_flutter: ^8.0.1
+  #列表动画
+  flutter_datetime_picker: ^1.4.0
+  flustars: ^0.3.2 
+  fdottedline: ^1.0.1
+  smart_select: ^3.0.3
+  flare_flutter: ^1.8.3
+  nima: ^1.0.5
+  flutter_tags: "^0.4.8+2"
+  flutter_easyrefresh: ^2.1.5
+  flutter_spinkit: "^4.1.2"
+  flutter_html: ^1.0.0
+  flutter_swiper: ^1.1.6
+  flutter_custom_dialog: ^1.0.20
+  draggable_flutter_list: "^1.0.3"
+  fl_chart: 
+    path: ../fl_chart
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -80,13 +97,28 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
+    - resource/
     - resource/images/
     - resource/svgs/
 
   # The following line ensures that the Material Icons font is
+  #https://github.com/skjun/fl_chart.git
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+ 
+  fonts:
+    - family: WorkSansSemiBold
+      fonts:
+        - asset: resource/fonts/WorkSans-SemiBold.ttf
+
+    - family: WorkSansBold
+      fonts:
+        - asset: resource/fonts/WorkSans-Bold.ttf
+
+    - family: WorkSansMedium
+      fonts:
+        - asset: resource/fonts/WorkSans-Medium.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

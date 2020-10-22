@@ -1,8 +1,10 @@
 class Keys {
+  static final String firstInstall = "firstInstall";
   static final String currentLanguageCode = "current_language_code";
   static final String currentLanguage = "current_language";
   static final String currentNavHeader = "current_nav_header";
   static final String appName = "app_name";
+  static final String loginUser = "loginUser";
   static final String account = "account";
   static final String password = "password";
   static final String token = "token";
@@ -14,4 +16,13 @@ class Keys {
   static final String autoDarkMode = "auto_dark_mode";
   static final String autoDarkModeTimeRange = "auto_dark_mode_time_range";
   static final String taskIconBeans = "task_icon_beans";
+
+  static final String needLogin = "needLogin";
+  static final String loginSuccess = "loginSuccess";
+  static final String openEditor = "openEditor";
+
+  /**
+   * 修改成功
+   */
+  static final String updateReportSuccess = "updateReportSuccess";
 }

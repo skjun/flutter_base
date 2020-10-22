@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:phonebase/app.dart';
+import 'package:medical/app.dart';
 
-import 'package:phonebase/utils/provider_config.dart';
+import 'package:medical/utils/provider_config.dart';
 
 void main() {
   runApp(

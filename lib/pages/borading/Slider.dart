@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:phonebase/utils/consts.dart';
+import 'package:medical/utils/consts.dart';
 
 class Slider {
   final String sliderImageUrl;

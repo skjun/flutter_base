@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:phonebase/i10n/localization_intl.dart';
-import 'package:phonebase/model/global_model.dart';
-import 'package:phonebase/pages/setting/about_page.dart';
-import 'package:phonebase/pages/setting/language_page.dart';
-import 'package:phonebase/utils/provider_config.dart';
+import 'package:medical/i10n/localization_intl.dart';
+import 'package:medical/model/global_model.dart';
+import 'package:medical/pages/setting/about_page.dart';
+import 'package:medical/pages/setting/language_page.dart';
+import 'package:medical/utils/provider_config.dart';
 import 'package:provider/provider.dart';
 
 class NavPage extends StatelessWidget {

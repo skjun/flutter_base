@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:phonebase/api/keys.dart';
-import 'package:phonebase/i10n/localization_intl.dart';
-import 'package:phonebase/model/global_model.dart';
-import 'package:phonebase/utils/shared_util.dart';
+import 'package:medical/api/keys.dart';
+import 'package:medical/i10n/localization_intl.dart';
+import 'package:medical/model/global_model.dart';
+import 'package:medical/utils/shared_util.dart';
 import 'package:provider/provider.dart';
 
 class LanguagePage extends StatelessWidget {

@@ -1,15 +1,22 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:medical/utils/global_uitl.dart';
+import 'package:medical/utils/toast_util.dart';
 export 'package:dio/dio.dart';
 
 ///Dio的封装类
 class ApiStrategy {
   static ApiStrategy _instance;
 
-  static final String baseUrl = "http://111.230.251.115/oldchen/";
-//  static final String baseUrl = "http://192.168.137.1:8080/";
+  static final String baseUrl = "http://49.234.34.162:8088/";
+
+  // static final String baseUrl = "http://medical:8888/";
   static const int connectTimeOut = 10 * 1000; //连接超时时间为10秒
   static const int receiveTimeOut = 15 * 1000; //响应超时时间为15秒
 
+  static final String defaultPhoto =
+      "${baseUrl}/assets/admin/img/defaultheader.jpg";
   Dio _client;
 
   static ApiStrategy getInstance() {
@@ -115,6 +122,14 @@ class ApiStrategy {
 
     String errorMsg = "";
     int statusCode;
+
+    var options = new Options(method: method, sendTimeout: 15000, headers: {
+      "platform": Platform.operatingSystem,
+      "token": GlobalUtil.getInstance().token != null
+          ? GlobalUtil.getInstance().token
+          : ""
+    });
+
     try {
       Response response;
       if (method == GET) {
@@ -122,6 +137,7 @@ class ApiStrategy {
         if (params != null && params.isNotEmpty) {
           response = await _client.get(
             url,
+            options: options,
             queryParameters: params,
             cancelToken: token,
           );
@@ -129,20 +145,24 @@ class ApiStrategy {
           response = await _client.get(
             url,
             cancelToken: token,
+            options: options,
           );
         }
       } else {
-        if (params != null && params.isNotEmpty || formData.length > 0) {
+        if (params != null && params.isNotEmpty ||
+            (formData != null && formData.length > 0)) {
           response = await _client.post(
             url,
             data: formData ?? new FormData.fromMap(params),
             onSendProgress: progressCallBack,
             cancelToken: token,
+            options: options,
           );
         } else {
           response = await _client.post(
             url,
             cancelToken: token,
+            options: options,
           );
         }
       }
@@ -157,7 +177,17 @@ class ApiStrategy {
       }
 
       if (callBack != null) {
-        callBack(response.data);
+        var data = response.data;
+        if (data['code'] != 200) {
+          if (data['code'] == 401) {
+            callBack(401);
+            return;
+          }
+
+          ToastUtil().showError(data['message']);
+          return;
+        }
+        callBack(data['data']);
       }
     } catch (e) {
       _handError(errorCallBack, e.toString());

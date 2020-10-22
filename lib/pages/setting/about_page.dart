@@ -1,14 +1,10 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:phonebase/api/api_service.dart';
-import 'package:phonebase/bean/update_info_bean.dart';
-import 'package:phonebase/i10n/localization_intl.dart';
-import 'package:phonebase/model/global_model.dart';
-import 'package:phonebase/pages/widgets/loading_widget.dart';
-import 'package:phonebase/pages/widgets/net_loading_widget.dart';
-import 'package:phonebase/pages/widgets/update_dialog.dart';
+import 'package:medical/api/api_service.dart';
+import 'package:medical/i10n/localization_intl.dart';
+import 'package:medical/model/global_model.dart';
+import 'package:medical/pages/widgets/net_loading_widget.dart';
 import 'package:provider/provider.dart';
 
 import 'package:package_info/package_info.dart';
@@ -144,37 +140,37 @@ class _AboutPageState extends State<AboutPage> {
               Navigator.pop(context);
             },
             onRequest: () {
-              ApiService.instance.checkUpdate(
-                success: (UpdateInfoBean updateInfo) async {
-                  final packageInfo = await PackageInfo.fromPlatform();
-                  bool needUpdate = UpdateInfoBean.needUpdate(
-                      packageInfo.version, updateInfo.appVersion);
-                  if (needUpdate) {
-                    Navigator.of(context).pop();
-                    showDialog(
-                        context: context,
-                        builder: (ctx2) {
-                          return UpdateDialog(
-                            version: updateInfo.appVersion,
-                            updateUrl: updateInfo.downloadUrl,
-                            updateInfo: updateInfo.updateInfo,
-                            updateInfoColor: globalModel.getBgInDark(),
-                            backgroundColor:
-                                globalModel.getPrimaryGreyInDark(context),
-                          );
-                        });
-                  }
-                  loadingController.setFlag(LoadingFlag.success);
-                },
-                error: (msg) {
-                  loadingController.setFlag(LoadingFlag.error);
-                },
-                params: {
-                  "language": globalModel.currentLocale.languageCode,
-                  "appId": "001"
-                },
-                token: cancelToken,
-              );
+              // ApiService.instance.checkUpdate(
+              //   success: (UpdateInfoBean updateInfo) async {
+              //     final packageInfo = await PackageInfo.fromPlatform();
+              //     bool needUpdate = UpdateInfoBean.needUpdate(
+              //         packageInfo.version, updateInfo.appVersion);
+              //     if (needUpdate) {
+              //       Navigator.of(context).pop();
+              //       showDialog(
+              //           context: context,
+              //           builder: (ctx2) {
+              //             return UpdateDialog(
+              //               version: updateInfo.appVersion,
+              //               updateUrl: updateInfo.downloadUrl,
+              //               updateInfo: updateInfo.updateInfo,
+              //               updateInfoColor: globalModel.getBgInDark(),
+              //               backgroundColor:
+              //                   globalModel.getPrimaryGreyInDark(context),
+              //             );
+              //           });
+              //     }
+              //     loadingController.setFlag(LoadingFlag.success);
+              //   },
+              //   error: (msg) {
+              //     loadingController.setFlag(LoadingFlag.error);
+              //   },
+              //   params: {
+              //     "language": globalModel.currentLocale.languageCode,
+              //     "appId": "001"
+              //   },
+              //   token: cancelToken,
+              // );
             },
             cancelToken: cancelToken,
           );

@@ -1,5 +1,4 @@
 class UpdateInfoBean {
-
   /*
    * appVersion : "1.0.0"
    * appName : "无"
@@ -19,7 +18,7 @@ class UpdateInfoBean {
     updateInfoBean.appVersion = map['appVersion'];
     updateInfoBean.appName = map['appName'];
     updateInfoBean.updateInfo = map['updateInfo'];
-    updateInfoBean.downloadUrl = map['downloadUrl'];
+    updateInfoBean.downloadUrl = map['updateUrl'];
     updateInfoBean.appId = map['appId'];
     return updateInfoBean;
   }
@@ -32,7 +31,7 @@ class UpdateInfoBean {
     return list;
   }
 
-  static  bool needUpdate(String oldVersion, String newVersion){
+  static bool needUpdate(String oldVersion, String newVersion) {
     final oldList = oldVersion.split(".");
     final newList = newVersion.split(".");
 
@@ -43,15 +42,13 @@ class UpdateInfoBean {
       String newNumString = newList[i];
       int oldNum = int.parse(oldNumString);
       int newNum = int.parse(newNumString);
-      if(newNum > oldNum){
+      if (newNum > oldNum) {
         needUpdate = true;
         return needUpdate;
-      } else if(oldNum > newNum){
+      } else if (oldNum > newNum) {
         return false;
       }
     }
     return needUpdate;
-
   }
-
 }

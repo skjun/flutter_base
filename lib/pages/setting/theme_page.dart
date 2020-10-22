@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:phonebase/i10n/localization_intl.dart';
-import 'package:phonebase/model/global_model.dart';
-import 'package:phonebase/model/theme_page_model.dart';
-import 'package:phonebase/pages/widgets/custom_animated_switcher.dart';
+import 'package:medical/i10n/localization_intl.dart';
+import 'package:medical/model/global_model.dart';
+import 'package:medical/model/theme_page_model.dart';
+import 'package:medical/pages/widgets/custom_animated_switcher.dart';
 import 'package:provider/provider.dart';
 
 class ThemePage extends StatelessWidget {

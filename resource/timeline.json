@@ -1,0 +1,97 @@
+[
+	{
+		"date": 19860824,
+		"label": "Big Bang",
+		"article": "big_bang.txt",
+		"accent": [
+			55,
+			134,
+			222,
+			255
+		],
+		"ticks": {
+			"background": [
+				20,
+				57,
+				92,
+				240
+			],
+			"long": [
+				255,
+				255,
+				255,
+				75
+			],
+			"short": [
+				255,
+				255,
+				255,
+				51
+			],
+			"text": [
+				255,
+				255,
+				255,
+				157
+			]
+		},
+		"header": {
+			"background": [
+				11,
+				47,
+				81,
+				94
+			],
+			"text": [
+				255,
+				255,
+				255,
+				157
+			]
+		}
+	},
+	{
+		"date": 19870824,
+		"label": "Big Bang",
+		"article": "big_bang.txt",
+		"accent": [
+			55,
+			134,
+			222,
+			255
+		]
+	},
+	{
+		"date": 19880824,
+		"label": "Big Bang",
+		"article": "big_bang.txt",
+		"accent": [
+			55,
+			134,
+			222,
+			255
+		]
+	},
+	{
+		"date": 19890824,
+		"label": "Big Bang",
+		"article": "big_bang.txt",
+		"accent": [
+			55,
+			134,
+			222,
+			255
+		]
+	},
+	{
+		"date": 19900824,
+		"label": "Big Bang",
+		"article": "big_bang.txt",
+		"accent": [
+			55,
+			134,
+			222,
+			255
+		]
+	}
+]

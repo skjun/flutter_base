@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
-import 'package:phonebase/api/api_strategy.dart';
-import 'package:phonebase/pages/widgets/update_dialog.dart';
-import 'package:phonebase/utils/file_util.dart';
-import 'package:phonebase/utils/overlay_util.dart';
+import 'package:medical/api/api_strategy.dart';
+import 'package:medical/pages/widgets/update_dialog.dart';
+import 'package:medical/utils/file_util.dart';
+import 'package:medical/utils/overlay_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UpdateProgressWidget extends StatefulWidget {
@@ -162,7 +162,7 @@ class _UpdateProgressWidgetState extends State<UpdateProgressWidget>
     try {
       await ApiStrategy.getInstance().client.download(
         widget.updateUrl,
-        apkPath + "todo-list.apk",
+        apkPath + "medical.apk",
         cancelToken: token,
         onReceiveProgress: (int count, int total) {
           if (mounted) {
@@ -177,7 +177,7 @@ class _UpdateProgressWidgetState extends State<UpdateProgressWidget>
                 OverlayUtil.getInstance().hide();
                 debugPrint("读取的目录:$apkPath");
                 try {
-                  OpenFile.open(apkPath + "todo-list.apk");
+                  OpenFile.open(apkPath + "medical.apk");
                 } catch (e) {}
                 Navigator.of(context).pop();
               }

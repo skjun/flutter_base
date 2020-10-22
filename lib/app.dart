@@ -1,10 +1,14 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:phonebase/model/global_model.dart';
-import 'package:phonebase/pages/borading/OnBoardingScreen.dart';
-import 'package:phonebase/routers/routers.dart';
-import 'package:phonebase/utils/provider_config.dart';
-import 'package:phonebase/utils/theme_util.dart';
+import 'package:medical/model/global_model.dart';
+import 'package:medical/pages/borading/OnBoardingScreen.dart';
+// import 'package:medical/routers/routers.dart';
+import 'package:medical/utils/global_uitl.dart';
+import 'package:medical/utils/provider_config.dart';
+import 'package:medical/utils/theme_util.dart';
+import 'package:medical/utils/toast_util.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
 import 'i10n/localization_intl.dart';
@@ -23,8 +27,11 @@ class _MyappState extends State<Myapp> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<GlobalModel>(context)..setContext(context);
+    GlobalUtil.getInstance().globalModel = model;
 
-    return MaterialApp(
+    // Routes.configureRoutes(Routes.router);
+    return OKToast(
+        child: MaterialApp(
       title: model.appName,
       localizationsDelegates: [
         // ... app-specific localization delegate[s] here
@@ -66,14 +73,16 @@ class _MyappState extends State<Myapp> {
         debugPrint("locatassss:$locales  sups:$supportedLocales");
         return model.currentLocale;
       },
-      onGenerateRoute: Routes.router.generator,
+      // onGenerateRoute: Routes.router.generator,
       locale: model.currentLocale,
       theme: ThemeUtil.getInstance().getTheme(model.currentThemeBean),
-      home: model.showLoading ? LandingPage() : getHomePage(),
-    );
-  }
-
-  Widget getHomePage() {
-    return ProviderConfig.getInstance().getMainPage();
+      home: Container(
+        decoration: model.getBackground(),
+        child: SafeArea(
+            child: model.showLoading
+                ? ProviderConfig.getInstance().getGlobal(LandingPage())
+                : ProviderConfig.getInstance().getMainPage()),
+      ),
+    ));
   }
 }

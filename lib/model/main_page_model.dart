@@ -2,13 +2,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:medical/api/api_service.dart';
+import 'package:medical/bean/update_info_bean.dart';
+import 'package:medical/pages/widgets/update_dialog.dart';
+import 'package:medical/utils/theme_util.dart';
+import 'package:medical/utils/toast_util.dart';
 import 'package:package_info/package_info.dart';
-import 'package:phonebase/api/api_service.dart';
-import 'package:phonebase/bean/color_bean.dart';
-import 'package:phonebase/bean/update_info_bean.dart';
-import 'package:phonebase/pages/widgets/update_dialog.dart';
-import 'package:phonebase/utils/theme_util.dart';
-import 'package:phonebase/utils/toast_util.dart';
 
 import 'global_model.dart';
 
@@ -46,9 +45,10 @@ class MainPageModel extends ChangeNotifier {
     return BoxDecoration(
       gradient: isBgGradient
           ? LinearGradient(
-              colors: _getGradientColors(isBgChangeWithCard),
               begin: Alignment.topCenter,
-              end: Alignment.bottomCenter)
+              end: Alignment.bottomCenter,
+              colors: _getGradientColors(isBgChangeWithCard),
+            )
           : null,
       color: _getBgColor(isBgGradient, isBgChangeWithCard),
     );
@@ -92,7 +92,7 @@ class MainPageModel extends ChangeNotifier {
   }
 
   void checkUpdate(GlobalModel globalModel) {
-    if (Platform.isIOS) return;
+    // if (Platform.isIOS) return;
     final context = this.context;
     CancelToken cancelToken = CancelToken();
     ApiService.instance.checkUpdate(
@@ -100,6 +100,7 @@ class MainPageModel extends ChangeNotifier {
         final packageInfo = await PackageInfo.fromPlatform();
         bool needUpdate = UpdateInfoBean.needUpdate(
             packageInfo.version, updateInfo.appVersion);
+
         if (needUpdate) {
           showDialog(
               context: context,
@@ -117,7 +118,8 @@ class MainPageModel extends ChangeNotifier {
       error: (msg) {},
       params: {
         "language": globalModel.currentLocale.languageCode,
-        "appId": "001"
+        "appId": "001",
+        "platform": Platform.isIOS ? "ios" : "android"
       },
       token: cancelToken,
     );

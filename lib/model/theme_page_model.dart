@@ -3,13 +3,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/material_picker.dart';
-import 'package:phonebase/api/keys.dart';
-import 'package:phonebase/bean/color_bean.dart';
-import 'package:phonebase/bean/theme_bean.dart';
-import 'package:phonebase/model/global_model.dart';
-import 'package:phonebase/pages/widgets/custom_time_picker.dart';
-import 'package:phonebase/utils/shared_util.dart';
-import 'package:phonebase/utils/theme_util.dart';
+import 'package:medical/api/keys.dart';
+import 'package:medical/bean/color_bean.dart';
+import 'package:medical/bean/theme_bean.dart';
+import 'package:medical/model/global_model.dart';
+import 'package:medical/pages/widgets/custom_time_picker.dart';
+import 'package:medical/utils/shared_util.dart';
+import 'package:medical/utils/theme_util.dart';
 
 class ThemePageModel extends ChangeNotifier {
   BuildContext context;
@@ -191,7 +191,7 @@ class ThemePageModel extends ChangeNotifier {
       globalModel.enableAutoDarkMode = value;
       SharedUtil.instance
           .saveBoolean(Keys.autoDarkMode, globalModel.enableAutoDarkMode);
-      globalModel.getCurrentTheme().then((value) => globalModel.refresh());
+      // globalModel.getCurrentTheme().then((value) => globalModel.refresh());
     }
   }
 

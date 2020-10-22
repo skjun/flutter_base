@@ -1,6 +1,11 @@
-import 'package:phonebase/bean/common_bean.dart';
-import 'package:phonebase/bean/login_bean.dart';
-import 'package:phonebase/bean/update_info_bean.dart';
+import 'dart:math';
+
+import 'package:medical/bean/common_bean.dart';
+import 'package:medical/bean/login_bean.dart';
+import 'package:medical/bean/report_bean.dart';
+import 'package:medical/bean/report_type.dart';
+import 'package:medical/bean/report_type_keys.dart';
+import 'package:medical/bean/update_info_bean.dart';
 
 import 'api_strategy.dart';
 export 'package:dio/dio.dart';
@@ -12,7 +17,7 @@ class ApiService {
   static ApiService get instance => _getInstance();
   static ApiService _instance;
 
-  static final int requestSucceed = 0;
+  static final int requestSucceed = 200;
   static final int requestFailed = 1;
 
   ApiService._internal() {
@@ -58,14 +63,14 @@ class ApiService {
     Map<String, String> params,
     CancelToken token,
   }) {
-    UpdateInfoBean updateInfoBean = new UpdateInfoBean();
-    updateInfoBean.appVersion = "1.0.3";
-    //updateInfoBean.downloadUrl ="";
-    success(updateInfoBean);
+    // UpdateInfoBean updateInfoBean = new UpdateInfoBean();
+    // updateInfoBean.appVersion = "1.0.3";
+    // //updateInfoBean.downloadUrl ="";
+    // success(updateInfoBean);
 
-    return;
+    // return;
     ApiStrategy.getInstance().post(
-      "app/checkUpdate",
+      "api/checkUpdate",
       (data) {
         // 检查升级处理
         UpdateInfoBean updateInfoBean = UpdateInfoBean.fromMap(data);
@@ -88,18 +93,37 @@ class ApiService {
     CancelToken token,
   }) {
     ApiStrategy.getInstance().post(
-        "fUser/login",
+        "/api/login",
         (data) {
           LoginBean loginBean = LoginBean.fromMap(data);
-          if (loginBean.status == requestSucceed) {
-            success(loginBean);
-          } else {
-            failed(loginBean);
-          }
+          success(loginBean);
         },
         params: params,
         errorCallBack: (errorMessage) {
-          error(errorMessage);
+          if (error != null) {
+            error(errorMessage);
+          }
+        },
+        token: token);
+  }
+
+  void logout({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+    CancelToken token,
+  }) {
+    ApiStrategy.getInstance().post(
+        "/api/logout",
+        (data) {
+          success(null);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
         },
         token: token);
   }
@@ -137,5 +161,285 @@ class ApiService {
       url: "fUser/identifyCodeCheck",
       token: token,
     );
+  }
+
+  ///登录
+  void register({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+    CancelToken token,
+  }) {
+    ApiStrategy.getInstance().post(
+        "api/register",
+        (data) {
+          LoginBean loginBean = LoginBean.fromMap(data);
+          success(loginBean);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        },
+        token: token);
+  }
+
+  ///登录
+  void info({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+    CancelToken token,
+  }) {
+    ApiStrategy.getInstance().get(
+        "api/info",
+        (data) {
+          if (data == 401) {
+            success(data);
+          } else {
+            LoginBean loginBean = LoginBean.fromMap(data);
+            success(loginBean);
+          }
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        },
+        token: token);
+  }
+
+  //加载病人数据
+  void getPatients({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().get(
+        "api/getPatients",
+        (data) {
+          success(data);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+  //新增修改病人数据
+  void savePatients({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().post(
+        "api/createPatient",
+        (data) {
+          success(data);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+  //新增修改病人数据
+  void saveReport({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().post(
+        "api/saveReportValue",
+        (data) {
+          success(data);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+  //删除报告单数据
+  void deleteReport({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().post(
+        "api/delReport",
+        (data) {
+          success(data);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+  //新增修改病人数据
+  void getReports({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().get(
+        "api/getUserReports",
+        (data) {
+          var reports = ReportBean.fromMapList(data);
+          success(reports);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+  void getReportTypes({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().get(
+        "api/getReportTypeList",
+        (data) {
+          var types = ReportTypeBean.fromMapList(data);
+          success(types);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+  void getPatientTrend({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().get(
+        "api/getTrendValue",
+        (data) {
+          success(data);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+/**
+ * 获取所有新闻数据
+ */
+  void getBlogs({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().get(
+        "api/blogs",
+        (data) {
+          success(data);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+  /**
+   * 获取单个新闻页面
+   */
+  void getBlogItem({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().get(
+        "api/getBlogItem",
+        (data) {
+          success(data);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+  //获取用户报告单设置数据
+
+  /**
+   * 获取单个新闻页面
+   * 输入 report_type_id :
+   * 
+   */
+  void getUserReportKeys({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().get(
+        "api/getUserReportKeys",
+        (data) {
+          print(data);
+          success(ReportTypeKeysBean.fromMapList(data));
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
+  }
+
+  void saveReportValue({
+    Map<String, String> params,
+    Function success,
+    Function failed,
+    Function error,
+  }) {
+    ApiStrategy.getInstance().post(
+        "api/saveUserReportKeys",
+        (data) {
+          success(data);
+        },
+        params: params,
+        errorCallBack: (errorMessage) {
+          if (error != null) {
+            error(errorMessage);
+          }
+        });
   }
 }

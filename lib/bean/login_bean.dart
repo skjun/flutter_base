@@ -1,20 +1,16 @@
-
-
-class LoginBean{
-
+class LoginBean {
   String description;
-  int status;
+  int id;
   String token;
-  String username;
-  String avatarUrl;
+  String mobile;
+  String photo_url;
 
   static LoginBean fromMap(Map<String, dynamic> map) {
     LoginBean loginBean = new LoginBean();
-    loginBean.description = map['description'];
-    loginBean.status = map['status'];
+    loginBean.id = map['id'];
     loginBean.token = map['token'];
-    loginBean.username = map['username'];
-    loginBean.avatarUrl = map['avatarUrl'];
+    loginBean.mobile = map['mobile'];
+    loginBean.photo_url = map['photo_url'];
     return loginBean;
   }
 
@@ -25,5 +21,4 @@ class LoginBean{
     }
     return list;
   }
-
 }

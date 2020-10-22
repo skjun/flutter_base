@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:phonebase/pages/main/main_page.dart';
-import 'package:phonebase/pages/widgets/Buttons.dart';
-import 'package:phonebase/pages/widgets/TextStyles.dart';
-import 'package:phonebase/utils/consts.dart';
-import 'package:phonebase/utils/provider_config.dart';
+import 'package:medical/model/global_model.dart';
+import 'package:medical/pages/main/main_page.dart';
+import 'package:medical/pages/widgets/Buttons.dart';
+import 'package:medical/pages/widgets/TextStyles.dart';
+import 'package:medical/utils/consts.dart';
+import 'package:medical/utils/global_uitl.dart';
+import 'package:medical/utils/provider_config.dart';
+import 'package:provider/provider.dart';
 
 import 'Slider.dart';
 
@@ -16,9 +19,8 @@ class SlideItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     onPressed() {
-      Navigator.push(context, MaterialPageRoute(builder: (_) {
-        return ProviderConfig.getInstance().getMainPage();
-      }));
+      // final globalModel = Provider.of<GlobalModel>(context);
+      GlobalUtil.getInstance().globalModel.firstVisedEnd(context);
     }
 
     return Column(

@@ -2,9 +2,10 @@ import 'dart:convert' as convert;
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:phonebase/pages/main/mul_page.dart';
+import 'package:medical/bean/patients.dart';
+import 'package:medical/utils/provider_config.dart';
 
-var indexPageHandler = new Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return MulPage();
+var patientEditPageHandler = new Handler(
+    handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return ProviderConfig.getInstance().getPatientPage(params['patient']);
 });

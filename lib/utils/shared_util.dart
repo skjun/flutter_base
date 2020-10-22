@@ -1,4 +1,4 @@
-import 'package:phonebase/api/keys.dart';
+import 'package:medical/api/keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedUtil {
@@ -16,6 +16,11 @@ class SharedUtil {
       _instance = new SharedUtil._internal();
     }
     return _instance;
+  }
+
+  Future saveGlobalString(String key, String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(key, value);
   }
 
   Future saveString(String key, String value) async {
@@ -79,6 +84,11 @@ class SharedUtil {
   }
 
   //-----------------------------------------------------get----------------------------------------------------
+
+  Future<String> getGlobalString(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(key);
+  }
 
   Future<String> getString(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

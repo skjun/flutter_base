@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:phonebase/utils/consts.dart';
+import 'package:medical/utils/consts.dart';
 
 import 'TextStyles.dart';
 

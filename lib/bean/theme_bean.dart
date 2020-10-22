@@ -1,5 +1,4 @@
-
-import 'package:phonebase/bean/color_bean.dart';
+import 'package:medical/bean/color_bean.dart';
 
 class ThemeBean {
   String themeName;
@@ -28,6 +27,4 @@ class ThemeBean {
   bool operator ==(other) {
     return other.themeName == themeName;
   }
-
-
 }

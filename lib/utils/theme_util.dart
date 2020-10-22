@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:phonebase/api/keys.dart';
-import 'package:phonebase/bean/color_bean.dart';
-import 'package:phonebase/bean/theme_bean.dart';
-import 'package:phonebase/utils/shared_util.dart';
+import 'package:medical/api/keys.dart';
+import 'package:medical/bean/color_bean.dart';
+import 'package:medical/bean/theme_bean.dart';
+import 'package:medical/utils/shared_util.dart';
 
 class ThemeUtil {
   static ThemeUtil _instance;

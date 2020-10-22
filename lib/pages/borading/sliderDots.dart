@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phonebase/utils/consts.dart';
+import 'package:medical/utils/consts.dart';
 
 class SlideDots extends StatelessWidget {
   bool isActive;
